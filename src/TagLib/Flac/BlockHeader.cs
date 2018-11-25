@@ -137,6 +137,10 @@ namespace TagLib.Flac
 		/// </param>
 		public BlockHeader (BlockType type, uint blockSize)
 		{
+			if (blockSize > 0xffffff)
+				throw new CorruptFileException (
+					"Block size too large.");
+
 			block_type    = type;
 			is_last_block = false;
 			block_size    = blockSize;
